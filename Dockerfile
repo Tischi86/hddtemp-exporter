@@ -11,7 +11,8 @@ RUN go get github.com/prometheus/client_golang/prometheus/promauto
 RUN go get github.com/prometheus/client_golang/prometheus/promhttp
 
 COPY hddexporter.go .
+COPY run.sh .
 
 # Define default command.
 # CMD hddtemp -d --listen localhost --port 7634 /dev/sd[cd] && go run hddexporter.go
-CMD hddtemp -d --listen localhost --port 7634 $HDDTEMP_ARGS && go run hddexporter.go
+ENTRYPOINT ["/run.sh"]
